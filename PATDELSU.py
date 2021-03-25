@@ -73,7 +73,7 @@ def eXO():
 def P_display():
     global rootS,head,inp_s,entry,searchB
     rootS=tkinter.Tk()
-    rootS.title("SEARCH WINDOW")
+    rootS.title("Окно поиска")
     head=tkinter.Label(rootS,text="ENTER PATIENT ID TO SEARCH",fg="red")
     entry=tkinter.Entry(rootS)
     searchB=tkinter.Button(rootS,text='SEARCH',command=Search_button)

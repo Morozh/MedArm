@@ -17,7 +17,7 @@ def room_button():
     r5=da.get()
     r6=dd.get()
     conn.execute('INSERT INTO ROOM VALUES(?,?,?,?,?,?)',(r1,r3, r2, r4, r5, r6,))
-    tkinter.messagebox.showinfo("MEDANTA DATABSE SYSTEM", "ROOM ALLOCATED")
+    tkinter.messagebox.showinfo("medARM БД система", "ROOM ALLOCATED")
     conn.commit()
     conn.close()
 

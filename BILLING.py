@@ -12,7 +12,7 @@ def date_up():
     b2 = dd.get()
     conn.execute("UPDATE ROOM SET DATE_DISCHARGED=? where PATIENT_ID=?", (b2, b1,))
     conn.commit()
-    tkinter.messagebox.showinfo("MEDANTA DATABASE SYSTEM", "DISCHARGE DATE UPDATED")
+    tkinter.messagebox.showinfo("medARM БД система", "DISCHARGE DATE UPDATED")
 
 def up():
     global c1, b1, P_id, b3, b4, b5, b6, dd, treat_1, treat_2, cost_t, b7, b8, med, med_q, price, u
@@ -52,8 +52,8 @@ def exitt():
 def BILLING():
     global rootB,L1,treat1,P_id,dd,cost,med,med_q,price,treat_1,treat_2,cost_t,j,jj,jjj,jjjj,L2,L3,L4
     rootB=tkinter.Tk()
-    rootB.geometry("450x350")
-    rootB.title("BILLING SYSTEM")
+    rootB.geometry("1366x768")
+    rootB.title("Биллинговая система")
     head=tkinter.Label(rootB,text="PATIENT BILL",font="Arial 16 bold italic",fg='grey')
     head.place(x=100,y=10)
     id = tkinter.Label(rootB, text="PATIENT ID")
@@ -68,7 +68,7 @@ def BILLING():
     ddp.place(x=270,y=100)
     treat = tkinter.Label(rootB, text="SELECT TREATMENT")
     treat.place(x=20, y=140)
-    L1 = ["CONSULATION","SURGERY","LAB TEST"]
+    L1 = ["Консультация","Операция","Лабораторное тестирование"]
     treat_1= tkinter.Listbox(rootB, width=15, height=1, selectmode='SINGLE', exportselection=0)
     for j in L1:
         treat_1.insert(tkinter.END, j)
