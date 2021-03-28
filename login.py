@@ -1,5 +1,5 @@
 import tkinter
-from window2 import menu
+from mainmenu import menu
 
 #root=login page
 #root1=menu
@@ -27,27 +27,27 @@ def GET():
         error.pack()
 
 
-#LOGIN PAGE WINDOW
+#АВТОРИЗАЦИЯ
 def Entry():
     global userbox,passbox,login,topframe,bottomframe,image_1
     root = tkinter.Tk()
-    root.geometry("1366x768")
+    root.geometry("430x320")
     topframe = tkinter.Frame(root)
     topframe.pack()
     bottomframe=tkinter.Frame(root)
     bottomframe.pack()
-    heading = tkinter.Label(topframe, text="Добро пожаловать",bg='white',fg='orange',font='Times 16 bold italic')
-    username=tkinter.Label(topframe,text="Логин")
-    userbox = tkinter.Entry(topframe)
-    password=tkinter.Label(bottomframe,text="Пароль")
-    passbox = tkinter.Entry(bottomframe,show="*")
-    login = tkinter.Button(bottomframe, text="Авторизироваться", command=GET,font="arial 8 bold")
+    heading = tkinter.Label(topframe, text="Лабораторная информационная система \n medARM.", fg="#FFF",font='Times 16 bold', bg="#73ACDA", padx=20, pady=10)
+    username = tkinter.Label(topframe,text="Логин", fg='#73ACDA', font="arial 14 normal", padx=20, pady=10)
+    userbox = tkinter.Entry(topframe, show="*", borderwidth=1, relief="solid")
+    password = tkinter.Label(bottomframe, text="Пароль", fg='#73ACDA', font="arial 14 normal", padx=20, pady=10)
+    passbox = tkinter.Entry(bottomframe, show="*", borderwidth=1, relief="solid")
+    login = tkinter.Button(bottomframe, text="Авторизироваться", command=GET, font="arial 14 normal", fg='#73ACDA', borderwidth=1, relief="solid")
     heading.pack()
     username.pack()
     userbox.pack()
     password.pack()
     passbox.pack()
-    login.pack()
+    login.pack(pady=20)
     root.title("Авторизация в системе")
     root.mainloop()
 
