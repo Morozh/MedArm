@@ -20,7 +20,7 @@ def GET():
     S2=passbox.get()
     if(S1=='Admin' and S2=='1234'):
         menu()
-    elif(S1=='1' and S2=='1'):
+    elif(S1=='' and S2==''):
         menu()
     else:
         error=tkinter.Label(bottomframe,text="Неправильный ID или пароль \n Попробуйте снова",fg="red",font="bold")

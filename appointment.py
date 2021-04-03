@@ -16,11 +16,10 @@ def set():
     conn.commit()
     tkinter.messagebox.showinfo("medARM ЛИС система", "Запись на прием прошла успешно")
 
-
 def appo():
     global rootAA,L,e1,e2,e3,e4,e5,e6
     rootAA=tkinter.Tk()
-    rootAA.geometry("500x370")
+    rootAA.geometry("500x460")
     rootAA.title("Запись на прием")
     H=tkinter.Label(rootAA,text="Запись на прием", bg="#73ACDA", fg='white', font="Times 16 bold", padx=10)
     H.place(x=0,y=0)
@@ -68,24 +67,22 @@ def remove():
     edd=str(e7.get())
     v=list(conn.execute("select * from appointment where AP_NO=?", (edd,)))
     if (len(v)==0):
-        errorD = tkinter.Label(rootAA, text="Запись на прием не исправлена",fg="red")
-        errorD.place(x=20,y=420)
+        errorD = tkinter.Label(rootAA, text="Запись на прием не найдена",fg="red")
+        errorD.place(x=10,y=440)
     else:
         conn.execute('DELETE FROM PATIENT where PATIENT_ID=?',(edd,))
         disd1=tkinter.Label(rootAA,text="Запись на прием удалена",fg='green')
-        disd1.place(x=20,y=420)
+        disd1.place(x=10,y=440)
         conn.commit()
-
-
 
 def dela():
     global e1,e7
     l3 = tkinter.Label(rootAA, text="Введите номер записи для удаления")
-    l3.place(x=20, y=340)
+    l3.place(x=10, y=360)
     e7=tkinter.Entry(rootAA, borderwidth=1, relief="solid")
-    e7.place(x=20,y=360)
+    e7.place(x=10,y=380)
     b3=tkinter.Button(rootAA,text="Удалить", borderwidth=1, relief="solid",command=remove)
-    b3.place(x=50,y=380)
+    b3.place(x=10,y=410)
 
 rootAP=None
 
@@ -102,16 +99,15 @@ def viewappointment():
             s1=tkinter.Label(rootAP,text=i,fg='green')
             s1.place(x=10,y=85)
 
-
 def va():
     global rootAP,e8
     rootAP=tkinter.Tk()
     rootAP.geometry("500x550")
     rootAP.title("Записи на сегодня")
-    h1=tkinter.Label(rootAP,text="Выберите день для выбора записи")
-    h1.place(x=20,y=20)
-    e8=tkinter.Entry(rootAP)
-    e8.place(x=20,y=40)
+    h1=tkinter.Label(rootAP,text="Введите день для просмотра записи", bg="#73ACDA", fg='white', font="Times 16 bold", padx=10)
+    h1.place(x=0,y=0)
+    e8=tkinter.Entry(rootAP, borderwidth=1, relief="solid")
+    e8.place(x=10,y=35)
     b5=tkinter.Button(rootAP,text="Поиск", borderwidth=1, relief="solid",command=viewappointment)
-    b5.place(x=30,y=65)
+    b5.place(x=10,y=65)
     rootAP.mainloop()
