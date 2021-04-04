@@ -13,7 +13,7 @@ topframe=None
 bottomframe=None
 frame3=None
 login=None
-#command for login button
+#ПРОВЕРКА ПОСЛЕ НАЖАТИЯ
 def GET():
     global userbox,passbox,error
     S1=userbox.get()
@@ -25,7 +25,6 @@ def GET():
     else:
         error=tkinter.Label(bottomframe,text="Неправильный ID или пароль \n Попробуйте снова",fg="red",font="bold")
         error.pack()
-
 
 #АВТОРИЗАЦИЯ
 def Entry():
@@ -41,7 +40,7 @@ def Entry():
     userbox = tkinter.Entry(topframe, show="*", borderwidth=1, relief="solid")
     password = tkinter.Label(bottomframe, text="Пароль", fg='#73ACDA', font="arial 14 normal", padx=20, pady=10)
     passbox = tkinter.Entry(bottomframe, show="*", borderwidth=1, relief="solid")
-    login = tkinter.Button(bottomframe, text="Авторизироваться", command=GET, font="arial 14 normal", fg='#73ACDA', borderwidth=1, relief="solid")
+    login = tkinter.Button(bottomframe, text="Авторизироваться", command=GET, font="arial 14 normal", fg='#73ACDA', bg="#FFF" ,borderwidth=1, relief="solid")
     heading.pack()
     username.pack()
     userbox.pack()
@@ -49,6 +48,8 @@ def Entry():
     passbox.pack()
     login.pack(pady=20)
     root.title("Авторизация в системе")
+
+    root.iconbitmap('assets/medical.ico')
     root.mainloop()
 
 Entry()

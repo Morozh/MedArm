@@ -14,7 +14,7 @@ def inp():
     e7=t5.get()
     e8=t6.get()
     e9=t7.get()
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("database/medDB.db")
     conn.execute("INSERT INTO employee VALUES(?,?,?,?,?,?,?,?,?)",(e1,e2,e3,e4,e5,e6,e7,e8,e9,))
     conn.commit()
     tkinter.messagebox.showinfo("medARM ЛИС система", "Данные о работнике занесены")
@@ -81,12 +81,13 @@ def emp_screen():
     b2.place(x=80,y=430)
     b3=tkinter.Button(rootE,text="Выйти", borderwidth=1, relief="solid",command=ex)
     b3.place(x=135,y=430)
+    rootE.iconbitmap('assets/medical.ico')
     rootE.mainloop()
 
 def delling():
     global d1,de
     de=str(d1.get())
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("database/medDB.db")
     p = list(conn.execute("select * from employee where EMP_ID=?", (de,)))
     if (len(p) != 0):
         conn.execute("DELETE from employee where EMP_ID=?", (de,))
@@ -109,4 +110,5 @@ def delo():
     d1.place(x=10,y=40)
     B1=tkinter.Button(rootDE,text="Удалить", borderwidth=1, relief="solid", command=delling)
     B1.place(x=10,y=70)
+    rootDE.iconbitmap('assets/medical.ico')
     rootDE.mainloop()

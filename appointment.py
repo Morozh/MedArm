@@ -1,6 +1,6 @@
 import tkinter
 import sqlite3
-conn=sqlite3.connect("MDBA.db")
+conn=sqlite3.connect("database/medDB.db")
 rootAA=None
 
 def set():
@@ -11,7 +11,7 @@ def set():
     p4=e4.get()
     p5=e5.get()
     p6=e6.get(1.0,tkinter.END)
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("database/medDB.db")
     conn.execute("Insert into appointment values(?,?,?,?,?,?)",(p1,p2,p3,p4,p5,p6,))
     conn.commit()
     tkinter.messagebox.showinfo("medARM ЛИС система", "Запись на прием прошла успешно")
@@ -46,7 +46,7 @@ def appo():
     l4.place(x=10,y=140)
     e4=tkinter.Entry(rootAA, borderwidth=1, relief="solid")
     e4.place(x=10,y=165)
-    l5 = tkinter.Label(rootAA,text="Дата записи (ДД-ММ-ГГГГ)")
+    l5 = tkinter.Label(rootAA,text="Дата записи (ГГГГ-ММ-ДД)")
     l5.place(x=10,y=195)
     e5=tkinter.Entry(rootAA, borderwidth=1, relief="solid")
     e5.place(x=10,y=220)
@@ -60,6 +60,7 @@ def appo():
     b2.place(x=180,y=330)
     b4=tkinter.Button(rootAA,text="Просмотр записей", borderwidth=1, relief="solid",command=va)
     b4.place(x=320,y=330)
+    rootAA.iconbitmap('assets/medical.ico')
     rootAA.mainloop()
 
 def remove():
@@ -71,7 +72,7 @@ def remove():
         errorD.place(x=10,y=440)
     else:
         conn.execute('DELETE FROM PATIENT where PATIENT_ID=?',(edd,))
-        disd1=tkinter.Label(rootAA,text="Запись на прием удалена",fg='green')
+        disd1=tkinter.Label(rootAA,text="Запись на прием удалена",fg='green', padx=5)
         disd1.place(x=10,y=440)
         conn.commit()
 
@@ -88,26 +89,51 @@ rootAP=None
 
 def viewappointment():
     global e8
+    global i,dis1,dis2,dis3,dis4,dis5,dis6
+    global l1,l2,l3,l4,l5,l6
     ap=str(e8.get())
-    vv = list(conn.execute("select * from appointment where AP_DATE=?", (ap,)))
+    vv = list(conn.execute("select * from appointment where PATIENT_ID=?", (ap,)))
     if (len(vv) == 0):
         errorD = tkinter.Label(rootAA, text="Нет записей на сегодня", fg="red")
         errorD.place(x=20, y=420)
     else:
-        s=conn.execute("Select PATIENT_ID,NAME,AP_NO,EMP_NAME,AP_DATE,AP_TIME from PATIENT NATURAL JOIN employee NATURAL JOIN appointment where AP_DATE=?",(ap,))
+        s=conn.execute("""select EMP_NAME, PATIENT_ID, AP_TIME, AP_DATE, description
+                       from appointment
+                       NATURAL JOIN employee
+                       where appointment.PATIENT_ID=?""", (ap,))
         for i in s:
-            s1=tkinter.Label(rootAP,text=i,fg='green')
-            s1.place(x=10,y=85)
+            l1 = tkinter.Label(rootAP, text="Имя врача", fg='blue', font="Times 12 bold")
+            dis1 = tkinter.Label(rootAP, text=i[0])
+            l2 = tkinter.Label(rootAP, text="ID пациента", fg='blue', font="Times 12 bold")
+            dis2 = tkinter.Label(rootAP, text=i[1])
+            l3 = tkinter.Label(rootAP, text="Время записи", fg='blue', font="Times 12 bold")
+            dis3 = tkinter.Label(rootAP, text=i[2])
+            l4 = tkinter.Label(rootAP, text="Дата записи", fg='blue', font="Times 12 bold")
+            dis4 = tkinter.Label(rootAP, text=i[3])
+            l5 = tkinter.Label(rootAP, text="Жалоба", fg='blue', font="Times 12 bold")
+            dis5 = tkinter.Label(rootAP, text=i[4])
+            l1.pack(pady=(100, 0))
+            dis1.pack()
+            l2.pack()
+            dis2.pack()
+            l3.pack()
+            dis3.pack()
+            l4.pack()
+            dis4.pack()
+            l5.pack()
+            dis5.pack()
+            conn.commit()
 
 def va():
     global rootAP,e8
     rootAP=tkinter.Tk()
-    rootAP.geometry("500x550")
+    rootAP.geometry("440x340")
     rootAP.title("Записи на сегодня")
-    h1=tkinter.Label(rootAP,text="Введите день для просмотра записи", bg="#73ACDA", fg='white', font="Times 16 bold", padx=10)
+    h1=tkinter.Label(rootAP,text="Введите ID пациента для просмотра записи", bg="#73ACDA", fg='white', font="Times 16 bold", padx=10)
     h1.place(x=0,y=0)
     e8=tkinter.Entry(rootAP, borderwidth=1, relief="solid")
     e8.place(x=10,y=35)
     b5=tkinter.Button(rootAP,text="Поиск", borderwidth=1, relief="solid",command=viewappointment)
     b5.place(x=10,y=65)
+    rootAP.iconbitmap('assets/medical.ico')
     rootAP.mainloop()

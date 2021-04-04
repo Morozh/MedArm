@@ -1,7 +1,7 @@
 import sqlite3
 import tkinter
 import tkinter.messagebox
-conn=sqlite3.connect("MDBA.db")
+conn=sqlite3.connect("database/medDB.db")
 
 #variables
 rootB=None
@@ -16,7 +16,7 @@ def date_up():
 
 def up():
     global c1, b1, P_id, b3, b4, b5, b6, dd, treat_1, treat_2, cost_t, b7, b8, med, med_q, price, u
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("database/medDB.db")
     c1 = conn.cursor()
     b1 = P_id.get()
     b3 = treat_1.get(tkinter.ACTIVE)
@@ -32,14 +32,14 @@ def up():
 
 def calci():
     global b1
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("database/medDB.db")
     u=conn.execute("Select sum(T_COST+ (M_COST*M_QTY) +(DATE_DISCHARGED-DATE_ADMITTED)*RATE) FROM ROOM NATURAL JOIN TREATMENT natural JOIN MEDICINE where PATIENT_ID=?",(b1,) )
     conn.commit()
     for ii in u:
-        pp=tkinter.Label(rootB,text="Общая сумма к уплате",fg='red',font='Arial 8 bold')
-        pp.place(x="200", y='260')
+        pp=tkinter.Label(rootB,text="Общая сумма к уплате", fg='red', font="Times 12 bold")
+        pp.place(x=200, y=260)
         uu=tkinter.Label(rootB,text=ii[0])
-        uu.place(x="230",y='290')
+        uu.place(x=230, y=290)
 
 L1=None
 L2=None
@@ -108,4 +108,5 @@ def BILLING():
     b2.place(x=70, y=210)
     ee=tkinter.Button(rootB,text="Выйти", borderwidth=1, relief="solid",command=exitt)
     ee.place(x=140,y=210)
+    rootB.iconbitmap('assets/medical.ico')
     rootB.mainloop()

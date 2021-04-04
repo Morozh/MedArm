@@ -1,7 +1,7 @@
 import sqlite3
 import tkinter
 import tkinter.messagebox
-conn=sqlite3.connect("MDBA.db")
+conn=sqlite3.connect("database/medDB.db")
 
 P_id=None
 rootR=None
@@ -9,7 +9,7 @@ rootR=None
 ##ROOM BUTTON
 def room_button():
     global P_id,r1,r2,room_t,da,dd,rate,room_no,r3,r4,r5,r6,conn
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("database/medDB.db")
     r1=P_id.get()
     r2=room_t.get(tkinter.ACTIVE)
     r3=room_no.get(tkinter.ACTIVE)
@@ -35,7 +35,7 @@ def update_button():
         tkinter.messagebox.showinfo("medARM ЛИС система", "Данные о палате обновлены")
         conn.commit()
     else:
-        tkinter.messagebox.showinfo("medARM ЛИС система", "Пациенту не выделена комната")
+        tkinter.messagebox.showinfo("medARM ЛИС система", "Пациенту не выделена палата")
 ##ROOT FOR DISPLAY ROOM INFO
 rootRD=None
 
@@ -47,7 +47,7 @@ def EXITT():
 ##FUNCTION FOR ROOM DISPLAY BUTTON
 def ROOMD_button():
     global r1,lr1,dis1,lr2,dis2,c1,ii,conn,c1,P_iid
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("database/medDB.db")
     c1=conn.cursor()
     r1=P_iid.get()
     p=list(c1.execute('select * from  ROOM  where PATIENT_ID=?',(r1,)))
@@ -56,15 +56,15 @@ def ROOMD_button():
     else:
         t=c1.execute('SELECT NAME,ROOM_NO,ROOM_TYPE FROM ROOM NATURAL JOIN PATIENT where PATIENT_ID=?',(r1,));
         for ii in t:
-            lr0=tkinter.Label(rootRD,text="Имя пациента",fg='blue')
+            lr0=tkinter.Label(rootRD,text="Имя пациента",fg='blue', font="Times 12 bold")
             dis0=tkinter.Label(rootRD,text=ii[0])
             lr0.place(x=50,y=120)
             dis0.place(x=50,y=140)
-            lr1=tkinter.Label(rootRD,text="Номер палаты",fg='blue')
+            lr1=tkinter.Label(rootRD,text="Номер палаты",fg='blue', font="Times 12 bold")
             dis1=tkinter.Label(rootRD,text=ii[1])
             lr1.place(x=50,y=170)
             dis1.place(x=50,y=190)
-            lr2=tkinter.Label(rootRD,text="Тип палаты",fg='blue')
+            lr2=tkinter.Label(rootRD,text="Тип палаты",fg='blue', font="Times 12 bold")
             dis2=tkinter.Label(rootRD,text=ii[2])
             lr2.place(x=50,y=220)
             dis2.place(x=50,y=240)
@@ -86,6 +86,7 @@ def roomDD():
     ss.place(x=10,y=90)
     e=tkinter.Button(rootRD,text="Выход", borderwidth=1, relief="solid",command=exittt)
     e.place(x=60,y=90)
+    rootRD.iconbitmap('assets/medical.ico')
     rootRD.mainloop()
 
 def exitt():
@@ -138,4 +139,5 @@ def Room_all():
     cr.place(x=190,y=340)
     ee=tkinter.Button(rootR,text="Выход", borderwidth=1, relief="solid",command=exitt)
     ee.place(x=330,y=340)
+    rootR.iconbitmap('assets/medical.ico')
     rootR.mainloop()

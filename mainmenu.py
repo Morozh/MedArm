@@ -9,8 +9,8 @@ from BILLING import BILLING
 from employee_reg import emp_screen
 from appointment import appo
 
-conn=sqlite3.connect("MDBA.db")
-print("DATABASE CONNECTION SUCCESSFUL")
+conn=sqlite3.connect("database/medDB.db")
+print("Связь с БД установлена")
 
 #variables
 root1=None
@@ -26,25 +26,24 @@ pat_contact=None
 pat_contactalt=None
 pat_CT=None
 
-
-#EXIT for MENU
+#ВЫЙТИ ИЗ МЕНЮ
 def ex():
     global root1
     root1.destroy()
 
-#MENU BUTTONS
+#ОПЦИИ МЕНЮ
 def menu():
     global root1,button1,button2,button3,button4,button5,m,button6
     root1 = tkinter.Tk()
     root1.geometry("1366x768")
     root1.title("Главное меню")
     m = tkinter.Label(root1,text="Главное меню",font='Times 24 bold',fg='#000')
-    button1 = tkinter.Button(root1,text="1. Регистрация пациента",font='Times 18 bold',bg='#73ACDA',fg='black', borderwidth=1, relief="solid",command=PAT)
-    button2 = tkinter.Button(root1, text="2. Распределение комнат",font='Times 18 bold',bg='#73ACDA',fg='black', borderwidth=1, relief="solid",command=Room_all)
-    button3 = tkinter.Button(root1, text="3. Регистрация сотрудника",font='Times 18 bold',bg='#73ACDA',fg='black', borderwidth=1, relief="solid",command=emp_screen)
-    button4 = tkinter.Button(root1, text="4. Записаться на прием",font='Times 18 bold',bg='#73ACDA',fg='black', borderwidth=1, relief="solid",command=appo)
-    button5 = tkinter.Button(root1, text="5. Карта пациента",font='Times 18 bold',bg='#73ACDA',fg='black', borderwidth=1, relief="solid",command=BILLING)
-    button6 = tkinter.Button(root1, text="Выйти",font='Times 18 bold',bg='#73ACDA',fg='black', borderwidth=1, relief="solid",command=ex)
+    button1 = tkinter.Button(root1,text="1. Регистрация пациента",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=PAT)
+    button2 = tkinter.Button(root1, text="2. Распределение комнат",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=Room_all)
+    button3 = tkinter.Button(root1, text="3. Регистрация сотрудника",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=emp_screen)
+    button4 = tkinter.Button(root1, text="4. Записаться на прием",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=appo)
+    button5 = tkinter.Button(root1, text="5. Бухгалтерия",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=BILLING)
+    button6 = tkinter.Button(root1, text="Выйти",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=ex)
     m.place(x=15,y=20)
     button1.pack(side=tkinter.TOP)
     button1.place(x=20,y=70)
@@ -59,13 +58,14 @@ def menu():
     button6.pack(side=tkinter.TOP)
     button6.place(x=20,y=320)
 
+    root1.iconbitmap('assets/medical.ico')
     root1.mainloop()
 
 p=None
-#input patient form
+#ФОРМА РЕГИСТРАЦИИ ПАЦИЕНТА
 def IN_PAT():
     global pp1, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10,ce1,conn
-    conn=sqlite3.connect("MDBA.db")
+    conn=sqlite3.connect("database/medDB.db")
     conn.cursor()
     pp1=pat_ID.get()
     pp2=pat_name.get()
@@ -79,22 +79,21 @@ def IN_PAT():
     pp10=pat_email.get()
     conn.execute('INSERT INTO PATIENT VALUES(?,?,?,?,?,?,?,?)',(pp1,pp2,pp3,pp4,pp5,pp8,pp9,pp10,))
     conn.execute('INSERT INTO CONTACT_NO VALUES (?,?,?)',(pp1,pp6,pp7,))
-    tkinter.messagebox.showinfo("medARM ЛИС система","DETAILS INSERTED INTO DATABASE")
+    tkinter.messagebox.showinfo("medARM ЛИС система","Данные добавлены в систему")
     conn.commit()
 
 
-#exit from patient form
+#ВЫЙТИ ИЗ ФОРМЫ ПАЦИЕНТА
 def EXO():
     rootp.destroy()
 
-#function for patient form help
 def nothing():
     print("Связь с базой данных установлена ")
 
 def nothing1():
     print("medARM. Сделано в ПКС 17/18")
 
-#PATIENT FORM
+#ФОРМА ПАЦИЕНТА
 back=None
 SEARCH=None
 DELETE=None
@@ -104,7 +103,7 @@ def PAT():
     global pat_address, pat_BG, pat_contact, pat_contactalt, pat_CT, pat_dob, pat_email, pat_ID, pat_name, pat_sex
     global rootp,regform,id,name,dob,sex,email,ct,addr,c1,c2,bg,SUBMIT,menubar,filemenu,back,SEARCH,DELETE,UPDATE
     rootp=tkinter.Tk()
-    rootp.title("medARM медицинская форма")
+    rootp.title("Новый пациент")
     menubar=tkinter.Menu(rootp)
     filemenu=tkinter.Menu(menubar,tearoff=0)
     filemenu.add_command(label="Добавить",command=PAT)
@@ -123,7 +122,7 @@ def PAT():
     pat_name = tkinter.Entry(rootp, borderwidth=1, relief="solid")
     sex=tkinter.Label(rootp,text="Пол")
     pat_sex=tkinter.Entry(rootp, borderwidth=1, relief="solid")
-    dob=tkinter.Label(rootp, text="Дата рождения (ДД-ММ-ГГГГ)")
+    dob=tkinter.Label(rootp, text="Дата рождения (ГГГГ-ММ-ДД)")
     pat_dob=tkinter.Entry(rootp, borderwidth=1, relief="solid")
     bg=tkinter.Label(rootp, text="Группа крови",)
     pat_BG=tkinter.Entry(rootp, borderwidth=1, relief="solid")
@@ -168,4 +167,5 @@ def PAT():
     UPDATE.pack(side=tkinter.LEFT, padx=(0, 10))
     DELETE.pack(side=tkinter.LEFT, padx=(0, 10))
     SEARCH.pack(side=tkinter.LEFT, pady=10)
+    rootp.iconbitmap('assets/medical.ico')
     rootp.mainloop()
