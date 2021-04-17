@@ -27,8 +27,8 @@ def BILLING():
     global rootB,L1,L3,treat1,P_id,dd,cost,med,med_q,price,treat_1,j,jjj
     rootB = tkinter.Tk()
     rootB.geometry("300x350")
-    rootB.title("Анализы")
-    head = tkinter.Label(rootB,text="Запись анализов", bg="#73ACDA", fg='white', font="Times 16 bold", padx=30)
+    rootB.title("Процедурный кабинет")
+    head = tkinter.Label(rootB,text="Процедурный кабинет", bg="#73ACDA", fg='white', font="Times 16 bold", padx=30)
     head.place(x=0,y=0)
     id = tkinter.Label(rootB, text="ID пациента")
     id.place(x=10, y=40)
