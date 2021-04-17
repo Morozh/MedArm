@@ -23,7 +23,7 @@ def Search_button():
     else:
         t=c1.execute('SELECT * FROM PATIENT NATURAL JOIN CONTACT_NO where PATIENT_ID=?',(inp_s,));
         for i in t:
-            l1=tkinter.Label(rootS,text="ID пациента",fg='blue', font="Times 12 bold")
+            l1=tkinter.Label(rootS,text="№ пациента",fg='blue', font="Times 12 bold")
             dis1=tkinter.Label(rootS,text=i[0])
             l2=tkinter.Label(rootS,text="Имя пациента",fg='blue', font="Times 12 bold")
             dis2=tkinter.Label(rootS,text=i[1])

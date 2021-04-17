@@ -42,7 +42,7 @@ def menu():
     button2 = tkinter.Button(root1, text="2. Распределение комнат",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=Room_all)
     button3 = tkinter.Button(root1, text="3. Регистрация сотрудника",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=emp_screen)
     button4 = tkinter.Button(root1, text="4. Записаться на прием",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=appo)
-    button5 = tkinter.Button(root1, text="5. Бухгалтерия",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=BILLING)
+    button5 = tkinter.Button(root1, text="5. Анализы",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=BILLING)
     button6 = tkinter.Button(root1, text="Выйти",font='Times 18 bold',bg='#FFF',fg='#73ACDA', borderwidth=1, relief="solid",command=ex)
     m.place(x=15,y=20)
     button1.pack(side=tkinter.TOP)

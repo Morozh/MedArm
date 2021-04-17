@@ -5,7 +5,7 @@ print("Связь с БД установлена")
 conn.execute("Drop table if EXISTS PATIENT")
 conn.execute("Drop table if EXISTS CONTACT_NO")
 conn.execute("Drop table if EXISTS ROOM")
-conn.execute("Drop table if EXISTS TREATMENT")
+conn.execute("Drop table if EXISTS ANALYZES")
 conn.execute("Drop table if EXISTS MEDICINE")
 
 conn.execute("""Create table PATIENT
@@ -24,7 +24,7 @@ conn.execute("""CREATE TABLE CONTACT_NO
                  (PATIENT_ID int(10) PRIMARY KEY,
                  CONTACTNO int(15) not null,
                  ALT_CONTACT int(15),
-                 FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID))
+                 FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));
             """)
 print("Таблица КОНТАКТНЫЙ НОМЕР успешно создана")
 
@@ -35,28 +35,19 @@ conn.execute("""Create table ROOM
                  RATE int(10) not null,
                  DATE_ADMITTED date,
                  DATE_DISCHARGED date NULL,
-                 FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID)
-                 );
+                 FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));
             """)
 print("Таблица КОМНАТА успешно создана")
 
-conn.execute("""CREATE TABLE TREATMENT
+conn.execute("""CREATE TABLE ANALYZES
                  (PATIENT_ID int(10) primary key,
-                 TREATMENT varchar(100) not null,
-                 TREATMENT_CODE varchar(30) not null,
-                 T_COST int(20) not null,
+                 AN_DATE date,
+                 AN_NAME varchar(15) not null,
+                 AN_COST int(10) not null,
+                 AN_STATUS varchar(15) not null,
                  FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));
              """)
-print("Таблица БУХГАЛТЕРИЯ успешно создана")
-
-conn.execute("""CREATE TABLE MEDICINE
-                (PATIENT_ID int(10) primary key,
-                 MEDICINE_NAME varchar(100) not null,
-                 M_COST int(20) not null,
-                 M_QTY int(10) not null,
-                 FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));
-             """)
-print("Таблица ЛЕЧЕНИЕ успешно создана")
+print("Таблица АНАЛИЗЫ успешно создана")
 
 conn.execute("""CREATE TABLE employee
                 (EMP_ID varchar(10) primary key,
