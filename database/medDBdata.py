@@ -32,7 +32,7 @@ conn.execute("""Create table ROOM
                  (PATIENT_ID int(10)not NULL ,
                  ROOM_NO varchar(20) PRIMARY KEY ,
                  ROOM_TYPE varchar(10) not null,
-                 RATE int(10) not null,
+                 RATE varchar(30) not null,
                  DATE_ADMITTED date,
                  DATE_DISCHARGED date NULL,
                  FOREIGN KEY(PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));

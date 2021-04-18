@@ -23,7 +23,7 @@ def GET():
     elif(S1=='' and S2==''):
         menu()
     else:
-        error=tkinter.Label(bottomframe,text="Неправильный ID или пароль \n Попробуйте снова",fg="red",font="bold")
+        error=tkinter.Label(bottomframe,text="Неправильный логин или пароль \n Попробуйте снова",fg="red",font="bold")
         error.pack()
 
 #АВТОРИЗАЦИЯ
@@ -49,7 +49,6 @@ def Entry():
     login.pack(pady=20)
     root.title("Авторизация в системе")
 
-    root.iconbitmap('assets/medical.ico')
     root.mainloop()
 
 Entry()
